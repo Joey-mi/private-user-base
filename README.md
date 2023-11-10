@@ -11,7 +11,7 @@
 6. Remove user
 
 ## Required Downloads
-Follow the basic installation instructions from https://demergent-labs.github.io/azle/installation.html .
+Follow the basic installation instructions from https://demergent-labs.github.io/azle/installation.html
 Also make sure that rust is installed
 
 
