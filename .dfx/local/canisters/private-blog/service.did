@@ -1,0 +1,212 @@
+service : {
+  changeUsername : (principal, text) -> (
+      variant {
+        Ok : text;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  createPost : (
+      principal,
+      record {
+        title : text;
+        content : text;
+        audio : vec nat8;
+        video : vec nat8;
+      },
+    ) -> (
+      variant {
+        Ok : record {
+          id : principal;
+          title : text;
+          content : text;
+          audio : vec nat8;
+          video : vec nat8;
+          createdAt : nat64;
+          creatorId : principal;
+          updatedAt : opt nat64;
+          reports : int8;
+        };
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  createUser : (text) -> (
+      record {
+        id : principal;
+        name : text;
+        posts : vec principal;
+        followers : vec principal;
+        following : vec principal;
+      },
+    );
+  deletePost : (principal) -> (
+      variant {
+        Ok : record {
+          id : principal;
+          title : text;
+          content : text;
+          audio : vec nat8;
+          video : vec nat8;
+          createdAt : nat64;
+          creatorId : principal;
+          updatedAt : opt nat64;
+          reports : int8;
+        };
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  editPost : (
+      principal,
+      record {
+        title : text;
+        content : text;
+        audio : vec nat8;
+        video : vec nat8;
+      },
+    ) -> (
+      variant {
+        Ok : record {
+          id : principal;
+          title : text;
+          content : text;
+          audio : vec nat8;
+          video : vec nat8;
+          createdAt : nat64;
+          creatorId : principal;
+          updatedAt : opt nat64;
+          reports : int8;
+        };
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  flagPost : (principal) -> (
+      variant {
+        Ok : text;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  followUser : (principal, principal) -> (
+      variant {
+        Ok : text;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  getPosts : () -> (
+      vec record {
+        id : principal;
+        title : text;
+        content : text;
+        audio : vec nat8;
+        video : vec nat8;
+        createdAt : nat64;
+        creatorId : principal;
+        updatedAt : opt nat64;
+        reports : int8;
+      },
+    ) query;
+  massRemoveFollowers : (principal, vec principal) -> (
+      variant {
+        Ok : bool;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  massUnfollow : (principal, vec principal) -> (
+      variant {
+        Ok : bool;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  postsByUser : (principal) -> (
+      variant {
+        Ok : vec record {
+          id : principal;
+          title : text;
+          content : text;
+          audio : vec nat8;
+          video : vec nat8;
+          createdAt : nat64;
+          creatorId : principal;
+          updatedAt : opt nat64;
+          reports : int8;
+        };
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    ) query;
+  removeUser : (principal) -> (
+      variant {
+        Ok : text;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  unfollow : (principal, principal) -> (
+      variant {
+        Ok : text;
+        Err : variant {
+          OutOfBounds : text;
+          PostDoesNotExist : principal;
+          UserDoesNotExist : principal;
+        };
+      },
+    );
+  viewFlaggedPosts : () -> (
+      vec record {
+        id : principal;
+        title : text;
+        content : text;
+        audio : vec nat8;
+        video : vec nat8;
+        createdAt : nat64;
+        creatorId : principal;
+        updatedAt : opt nat64;
+        reports : int8;
+      },
+    ) query;
+  viewUsers : () -> (
+      vec record {
+        id : principal;
+        name : text;
+        posts : vec principal;
+        followers : vec principal;
+        following : vec principal;
+      },
+    ) query;
+}
