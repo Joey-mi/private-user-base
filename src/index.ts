@@ -66,7 +66,7 @@ const thisCanister = blogCanister(
 let PostStorage = StableBTreeMap(Principal, Post, 1); 
 let UserBase = StableBTreeMap(Principal, User, 0);
 
-const reportLimit = 10;
+const reportLimit = 5;
 
 export default Canister({
 
@@ -423,7 +423,7 @@ export default Canister({
 
         return Ok('The post has been reported');
     }),
-    viewFlaggedPosts: query([], Vec(Post), () => {
+    viewMajorFlaggedPosts: query([], Vec(Post), () => {
         let allFlaggedPosts = PostStorage.values();
 
         allFlaggedPosts = allFlaggedPosts.filter(
